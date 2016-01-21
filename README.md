@@ -19,7 +19,7 @@ Code for www.codingame.com
 
  * APU:[README](https://github.com/AndLydakis/CodingGame/blob/master/medium/APU/APU.README) [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/APU/APU.java)
  * HeatDetector: [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/HeatDetector/HeatDetector.README) [cpp](https://github.com/AndLydakis/CodingGame/blob/master/medium/HeatDetector/HeatDetector.cpp) [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/HeatDetector/HeatDetector.java)
- * ParanoidAndroid: [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/ParanoidAndroid/ParanoidAndroid.java)
+ * ParanoidAndroid: [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/ParanoidAndroid/ParanoidAndroid.README)[java](https://github.com/AndLydakis/CodingGame/blob/master/medium/ParanoidAndroid/ParanoidAndroid.java) [JavaScript](https://github.com/AndLydakis/CodingGame/blob/master/medium/ParanoidAndroid/ParanoidAndroid.js)
  * Skynet: [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/Skynet/Skynet.java)
  * Teads: [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/Teads/Teads.README) [cpp](https://github.com/AndLydakis/CodingGame/blob/master/medium/Teads/Teads.cpp) [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/Teads/Teads.java)
  * Winamax: [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/Winamax/Winamax.README) [cpp](https://github.com/AndLydakis/CodingGame/blob/master/medium/Winamax/Winamax.cpp) [java](https://github.com/AndLydakis/CodingGame/blob/master/medium/Winamax/Winamax.java)
