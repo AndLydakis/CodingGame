@@ -1,0 +1,10 @@
+Implementation of the look-and-say algorithm
+
+Input
+Line 1: The original number R of the sequence.
+Line 2: The line L to display. The index of the first line is 1.
+Output
+The line L of the sequence. Each element of the sequence is separated by a space.
+Constraints
+0 < R < 100
+0 < L ≤ 25
