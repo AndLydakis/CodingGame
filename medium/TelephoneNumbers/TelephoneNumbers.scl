@@ -1,0 +1,50 @@
+import math._
+import scala.util._
+
+
+object Solution extends App {
+    val n = readInt
+    val root = new PhoneNumber(-1)
+  for(i <- 0 until n) {
+    val telephone = readLine
+    root.insert(telephone)
+  }
+    root.printSize()
+}
+
+
+object PhoneNumber {
+  var size: Int = 0
+}
+
+class PhoneNumber {
+  var id: Int = 0
+  var next: Array[PhoneNumber] = Array()
+
+  def this(id: Int) {
+    this()
+    this.id = id
+    this.next = new Array[PhoneNumber](10)
+  }
+
+  def insert(digits: String) {
+    //Console.err.println("Inserting "+ digits)
+    if ((digits.length) == 0) {
+      return
+    }
+    //Console.err.println("Examining "+ digits.charAt(0).asDigit)
+    if (this.next(digits.charAt(0).asDigit) != null) {
+      this.next(digits.charAt(0).asDigit).insert(digits.substring(1))
+    }
+    else {
+      this.next(digits.charAt(0).asDigit) = new PhoneNumber(digits.charAt(0).asDigit)
+      PhoneNumber.size += 1
+      this.next(digits.charAt(0).asDigit).insert(digits.substring(1))
+      //Console.err.println("increasing size")
+    }
+  }
+
+  def printSize(){
+    println(PhoneNumber.size)
+  }
+}
