@@ -81,16 +81,6 @@ public class Solution {
     }
 
     public static char blocked_dir(char dir, int blocked, int inverted){
-        /*if (dir=='S'){
-            return 'E';
-        }else if (dir =='E'){
-            return 'N';
-        }else if (dir == 'N'){
-            return 'W';
-        }else{
-            return 'S';
-        }
-        */
         System.err.println(inverted);
         if (inverted==-1) {
             if (blocked == 0) {
@@ -242,9 +232,7 @@ public class Solution {
         return b.dir;
 
     }
-    public String[] directions = {"SOUTH", "EAST", "NORTH", "WEST"};
-    // SOUTH EAST NORTH WEST BLOCK X BEER FREE GOAL
-    public int[] blockTypes = new int[]{0, 1 ,2 ,3, 4, 5, 6, 7, 8};
+
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         BenderInst bender = new BenderInst(0, 0);
@@ -255,13 +243,10 @@ public class Solution {
         int goal_x = 0;
         int goal_y = 0;
         int tc = 0;
-        int des1x = -1;
         int des2x = -1;
-        int des1y = -1;
         int des2y = -1;
         for (int i = 0; i < L; i++) {
             String row = in.nextLine();
-            // System.err.println(row);
             for (int j = 0; j < C; j++){
                 if(row.charAt(j)=='S'){
                     map[i][j]=new Block(i, j, 'S');
@@ -309,6 +294,8 @@ public class Solution {
             }
         }
         ArrayList<String> course = new ArrayList<>();
+        //DEBUGGING OUTPUT
+        /*
         for (int i = 0; i < L; i++) {
             for (int j = 0; j < C; j++) {
                 if((i==bender.pos_x)&&(j==bender.pos_y)){
@@ -319,6 +306,7 @@ public class Solution {
             }
             System.err.print("\n");
         }
+        */
         //System.exit(0);
         //course.add("SOUTH");
         int iter = 0;
@@ -326,16 +314,6 @@ public class Solution {
             System.err.println(iter);
             iter+=1;
             char b = move(bender, bender.pos_x, bender.pos_y, map, L, C);
-            /*
-            if (bender.dir == 'S'){
-                course.add("SOUTH");
-            }else if (bender.dir == 'E') {
-                course.add("EAST");
-            }else if (bender.dir == 'N') {
-                course.add("NORTH");
-            }else{
-                course.add("WEST");
-            }*/
 
             if (b == 'S'){
                 course.add("SOUTH");
@@ -366,8 +344,4 @@ public class Solution {
             System.out.println(course.get(i));
         }
     }
-
-
-
-
 }
