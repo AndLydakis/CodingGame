@@ -8,7 +8,6 @@ import java.math.*;
  * the standard input according to the problem statement.
  **/
 class Solution {
-
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         int L = in.nextInt();
