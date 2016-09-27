@@ -8,6 +8,10 @@ import java.math.*;
  * the standard input according to the problem statement.
  **/
 class Solution {
+
+    static int log20(double x){int val;x+=1; for(val=0; x>20; x/=20, val++); return val;}
+    static long exp20(int x){long  val=1; for(int i=0;i<x;i++)val*=20; return val;}
+
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         int L = in.nextInt();
@@ -35,61 +39,71 @@ class Solution {
         //System.err.println(numerals.get(20));
         //System.err.println(numerals.get(40));
         //System.err.println(numerals.get(60));
-        int S1 = in.nextInt();
+        long S1 = in.nextInt();
+        System.err.println(S1);
         ArrayList<String> s1 = new ArrayList<>();
         for (int i = 0; i < S1; i++) {
             String num1Line = in.next();
             s1.add(num1Line);
         }
         ArrayList<String> s2 = new ArrayList<>();
-        int S2 = in.nextInt();
+        long S2 = in.nextInt();
+        System.err.println(S2);
         for (int i = 0; i < S2; i++) {
             String num2Line = in.next();
             s2.add(num2Line);
         }
         String operation = in.next();
-        for (int i = 0; i < H; i++) {
+        for (int i = 0; i < S1; i++) {
             System.err.println(s1.get(i));
         }
-        for (int i = 0; i < H; i++) {
+        long ss1 = 0;
+        long ss2 = 0;
+        int i;
+        for(k = 0; k<(S1/H);k++){
+            //System.err.println("$$$"+k+" "+S1/H);
+            for(i = 0; i < 20 ; i++){
+                int eq = 1;
+                for(int j =0 ; j < H; j++){
+                    if(!s1.get((k*H)+j).equals(numerals.get(i+20*j))){
+                        eq = 0;
+                        continue;
+                    }
+                }
+                //System.err.println("-------------");
+                if (eq == 1 ){
+                    System.err.println(""+i+" * 20^"+((S1/H)-k-1)+" = "+(i*Math.pow(20, (S1/H)-k-1)));
+                    ss1+=(i*Math.pow(20, (S1/H)-k-1));
+                    //System.err.println("------"+i+"--------");
+                }
+            }
+        }
+        System.err.println(ss1);
+        System.err.println("%%%%%%%%%%%%%%%%%%%%%%");
+        for (i = 0; i < S2; i++) {
             System.err.println(s2.get(i));
         }
-        System.err.println("-------------");
-        int stidx = 0;
-        int ss1 = 0;
-        int ss2 = 0;
-        for(int i = 0; i < 20 ; i++){
-            int eq = 1;
-            for(int j =0 ; j < H; j++){
-                //System.err.println(numerals.get(i+20*j));
-                if(!s1.get(j).equals(numerals.get(i+20*j))){
-                    eq = 0;
-                    break;
+        for(k = 0; k<(S2/H);k++) {
+            //System.err.println("$$$" + k + " " + S2 / H);
+            for (i = 0; i < 20; i++) {
+                int eq = 1;
+                for (int j = 0; j < H; j++) {
+                    //System.err.println(numerals.get(i+20*j));
+                    if (!s2.get((k*H)+j).equals(numerals.get(i + 20 * j))) {
+                        eq = 0;
+                        break;
+                    }
+                }
+                //System.err.println("-------------");
+                if (eq == 1) {
+                    System.err.println(""+i+" * 20^"+((S2/H)-k-1)+" = "+(i*Math.pow(20, (S2/H)-k-1)));
+                    ss2+=(i*Math.pow(20, (S2/H)-k-1));
+                    //System.err.println("------"+i+"--------");
                 }
             }
-            //System.err.println("-------------");
-            if (eq == 1 ){
-                ss1 = i;
-            }
         }
-        //System.err.println(ss1);
-
-        for(int i = 0; i < 20 ; i++){
-            int eq = 1;
-            for(int j =0 ; j < H; j++){
-                //System.err.println(numerals.get(i+20*j));
-                if(!s2.get(j).equals(numerals.get(i+20*j))){
-                    eq = 0;
-                    break;
-                }
-            }
-            //System.err.println("-------------");
-            if (eq == 1 ){
-                ss2 = i;
-            }
-        }
-        // System.err.println(ss2);
-
+        System.err.println(ss2);
+        System.err.println("%%%%%%%%%%%%%%%%%%%%%%");
         //System.exit(0);
         // Write an action using System.out.println()
         // To debug: System.err.println("Debug messages...");
@@ -98,9 +112,6 @@ class Solution {
             res=ss1+ss2;
         }else if(operation.equals("-")){
             res=ss1-ss2;
-            if (res<0){
-                res=0;
-            }
         }
         else if(operation.equals("*")){
             res=ss1*ss2;
@@ -108,43 +119,23 @@ class Solution {
         else if (operation.equals("/")){
             res=ss1/ss2;
         }
-        double power = 0.0;
-        double div = 1;
-        while(Math.pow(power, 20.0)<res){
-            System.err.println(Math.pow(20.0, power));
-            div = Math.pow(power, 20.0);
-            power+=1;
-        }
-        //power-=1;
         System.err.println("-------------");
-        System.err.println(ss1);
-        System.err.println(operation);
-        System.err.println(ss2);
-        System.err.println(res);
-        System.err.println(power);
-        //System.out.println("result");
-        double rem = (double)res;
+        System.err.println(ss1+""+operation+""+ss2+"="+res);
         System.err.println("-------------");
         ArrayList<Integer> elems = new ArrayList<>();
         long element;
-
-        while (res>0){
-            element = res/20;
-            elems.add((int)element);
-            res = res/20;
-        }
-        elems.add((int)res);
-        System.err.println("-------------");
-        if(res!=0) {
-            elems.add((int)res);
-        }
-
-        for(int i = 0 ;i < elems.size();i++){
-            //if(elems.get(i)>0) {
-                for (int j = 0; j < H; j++) {
-                    System.out.println(numerals.get(elems.get(i) + 20 * j));
-                }
-            //}
+        long ex;
+        int p = log20(res);
+        while (p>=0){
+            ex=exp20(p);
+            System.err.println(ex);
+            element = res/ex;
+            System.err.println(element);
+            for (int j = 0; j < H; j++) {
+                System.out.println(numerals.get((int)element + 20 * j));
+            }
+            res=res-(element*ex);
+            p--;
         }
     }
 }
