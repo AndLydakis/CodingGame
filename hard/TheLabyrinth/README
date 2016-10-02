@@ -1,0 +1,8 @@
+What will I practice?
+
+BFSPathfinding
+This puzzle is all about exploring a 2D grid in an optimized way.
+You may implement BFS and a pathfinding algorithm such as A* to find the shortest path between two tiles.
+
+The goal of this puzzle is to explore a map with a fog-of-war until you have found a point of interest and the best path to get back. Take all the time you need on exploration
+ (Breadth First Search) because you will need to be certain to have the shortest path to get back to the entrance from the point of interest (Pathfinding).

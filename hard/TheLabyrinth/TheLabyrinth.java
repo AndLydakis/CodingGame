@@ -15,9 +15,9 @@ class Player {
         int x;
         int y;
         char type = '?';
-        int h;
+        double h;
         int g;
-        int f;
+        double f;
         int visited = 0;
         int color = 0;
         String dir = "";
@@ -48,8 +48,8 @@ class Player {
         @Override
         public int compareTo( final Block o) {
             if((this.x==o.x)&&(this.y==o.y)){
-                //if(this.f<o.f)return -1;
-                //if(this.f>o.f)return 1;
+//                //if(this.f<o.f)return -1;
+//                //if(this.f>o.f)return 1;
                 return 0;
             }
             if(this.f<o.f)return -1;
@@ -104,115 +104,65 @@ class Player {
                     for (int j = 0;j<C;j++){
                         if((map[i][j].type=='?')) {
                             map[i][j] = new Block(i, j, ROW.charAt(j));
-                            dis += 1;
-                            un -= 1;
+                        }
+                        if(map[i][j].type=='C'){
+                            goalx=i;
+                            goaly=j;
                         }
                     }
                 }
+                ArrayList<Block> neighsdfs = new ArrayList<>();
+                neighsdfs.add(map[KR + 1][KC]);
+                neighsdfs.add(map[KR][KC + 1]);
+                neighsdfs.add(map[KR - 1][KC]);
+                neighsdfs.add(map[KR][KC - 1]);
+                String direction;
+                int c = 0;
+                for (Block n : neighsdfs) {
+//                        System.err.println(n.x+" "+n.y+" "+n.visited+" "+n.type+" | "+map[KR][KC].visited+" "+map[KR][KC].x+" "+map[KR][KC].y);
+                    if ((n.type != '#') && (n.visited == 0 ) && (n.type != 'C')) {
+                        direction = getDir(map[KR][KC], n);
+                        System.out.println(direction);
+                        n.dir=inverse(direction);
+                        c += 1;
+                        break;
+                    }
+                }
+                if (c == 0) {
+//                if ((c == 0)||(un<dis*2)) {
+                    if(map[KR][KC].dir==""){
+                        System.err.println("No where to go");
+                        Astar=1;
+                        continue;
+                    }else {
+                        System.out.println(map[KR][KC].dir);
+                    }
+                }
+                KR = in.nextInt(); // row where Kirk is located.
+                KC = in.nextInt(); // column where Kirk is located.
+            }else{
                 for (int i = 0; i < R; i++) {
                     for (int j = 0;j<C;j++){
                         if((i==KR)&&(j==KC)){
                             System.err.printf("%3c",'@');
                         }else{
-//                            System.err.printf("%3d",map[i][j].visited);
                             System.err.printf("%3c",map[i][j].type);
+//                                        System.err.printf("%3d",map[i][j].f);
                         }
                     }
                     System.err.println("");
                 }
-                    ArrayList<Block> neighsdfs = new ArrayList<>();
-                    neighsdfs.add(map[KR + 1][KC]);
-                    neighsdfs.add(map[KR][KC + 1]);
-                    neighsdfs.add(map[KR - 1][KC]);
-                    neighsdfs.add(map[KR][KC - 1]);
-                    String direction;
-                    int c = 0;
-                    int mv = 1600000;
-                    for (Block n : neighsdfs) {
-                        System.err.println(n.x+" "+n.y+" "+n.visited+" "+n.type+" | "+map[KR][KC].visited+" "+map[KR][KC].x+" "+map[KR][KC].y);
-                        if ((n.type != '#') && (n.visited ==0 ) && (n.type != 'C')) {
-                            direction = getDir(map[KR][KC], n);
-                            System.out.println(direction);
-//                            System.err.println("$"+direction);
-                            back.add(inverse(direction));
-                            c += 1;
-                            break;
-                        }
-                    }
-                    if (c == 0) {
-                        back.remove(back.get(back.size()-1));
-                        System.out.println(back.get(back.size()-1));
-//                        back.remove(0);
-//                        System.out.println(back.get(0));
-                    }
-                KR = in.nextInt(); // row where Kirk is located.
-                KC = in.nextInt(); // column where Kirk is located.
-                /*
-                if((goalx!=initx)&&(goaly!=inity)) {
-                    if ((map[KR + 1][KC].type != '#') && (map[KR + 1][KC].type != '_') && (map[KR + 1][KC].visited == 0)  && (map[KR + 1][KC].type != 'C')) {
-                        pathsC.add("DOWN");
-                        pathsBack.add("UP");
-                        String s = pathsC.poll();
-                        System.out.println(s);
-//                        pathsBack.add(inverse(s));
-                    } else if ((map[KR][KC + 1].type != '#') && (map[KR][KC + 1].type != '_') && (map[KR][KC + 1].visited == 0)&& (map[KR][KC + 1].type != 'C')) {
-                        pathsC.add("RIGHT");
-                        pathsBack.add("LEFT");
-                        String s = pathsC.poll();
-                        System.out.println(s);
-//                        pathsBack.add(inverse(s));
-                    } else if ((map[KR - 1][KC].type != '#') && (map[KR - 1][KC].type != '_') && (map[KR - 1][KC].visited == 0)&& (map[KR-1][KC].type != '_')) {
-                        pathsC.add("UP");
-                        pathsBack.add("DOWN");
-                        String s = pathsC.poll();
-                        System.out.println(s);
-//                        pathsBack.add(inverse(s));
-                    } else if ((map[KR][KC - 1].type != '#') && (map[KR][KC - 1].type != '_') && (map[KR][KC - 1].visited == 0)) {
-                        pathsC.add("LEFT");
-                        pathsBack.add("RIGHT");
-                        String s = pathsC.poll();
-                        System.out.println(s);
-//                        pathsBack.add(inverse(s));
-                    } else {
-                        String s = pathsBack.get(pathsBack.size() - 1);
-                        pathsBack.remove(pathsBack.size() - 1);
-                        System.out.println(s);
-                        KR = in.nextInt(); // row where Kirk is located.
-                        KC = in.nextInt();
-                        continue;
-                    }
-                }
-                */
-            }else{
-                for (int w = pathsBack.size() - 1; w >= 0; w--) {
-                    //for (int w = 0; w<pathsBack.size(); w++){
-                    System.out.println(pathsBack.get(w));
-                    KR = in.nextInt(); // row where Kirk is located.
-                    KC = in.nextInt(); // column where Kirk is located.
-                    for (int i = 0; i < R; i++) {
-                        String ROW = in.next(); // C of the characters in '#.TC?' (i.e. one line of the ASCII maze).
-                        for (int j = 0;j<C;j++){
-                            if((i==KR)&&(j==KC)){
-                                System.err.printf("%3c",'@');
-                            }else{
-                                System.err.printf("%3c",map[i][j].type);
-                            }
-                        }
-                        System.err.println("");
-                    }
-                }
                 System.err.println("Start Astar");
-                HashSet<Block> closedSet = new HashSet<>();
+                PriorityQueue<Block> closedSet = new PriorityQueue<>();
                 PriorityQueue<Block> openSet = new PriorityQueue<>();
                 map[KR][KC].f = Math.abs(KR-goalx) + Math.abs(goaly-KC);
                 map[KR][KC].g = 0;
-                map[initx][inity].g = 9999;
+                int startx = KR;
+                int starty = KC;
                 int cx = initx;
                 int cy = inity;
                 openSet.add(map[KR][KC]);
                 Block current;
-//                goalx = initx;
-//                goaly = inity;
                 while (!openSet.isEmpty()) {
                     current = openSet.poll();
                     //System.err.println("Current : "+current.x+" "+current.y+" "+goalx+" "+goaly+" "+openSet.size());
@@ -246,8 +196,11 @@ class Player {
                                 for (int j = 0;j<C;j++){
                                     if((i==KR)&&(j==KC)){
                                         System.err.printf("%3c",'@');
+                                    }else if((i==goalx)&&(j==goaly)){
+                                        System.err.printf("%3c",'G');
                                     }else{
-                                        System.err.printf("%3c",map[i][j].type);
+//                                        System.err.printf("%3c",map[i][j].type);
+                                        System.err.printf("%3f",map[i][j].f);
                                     }
                                 }
                                 System.err.println("");
@@ -265,6 +218,7 @@ class Player {
                                         System.err.printf("%3c",'@');
                                     }else{
                                         System.err.printf("%3c",map[i][j].type);
+//                                        System.err.printf("%3d",map[i][j].f);
                                     }
                                 }
                                 System.err.println("");
@@ -278,38 +232,39 @@ class Player {
                     neighs.add(map[current.x-1][current.y]);
                     neighs.add(map[current.x][current.y-1]);
                     closedSet.add(current);
-//                    System.err.println(current.x+" "+current.y);
+                    System.err.println(current.x+" "+current.y+" "+closedSet.contains(current));
                     for (Block nn : neighs) {
-                        int g = current.g + 1;
-                        int h = Math.abs(nn.x-goalx)+Math.abs(nn.y-goaly);
+//                        int h = Math.abs(nn.x-goalx)+Math.abs(nn.y-goaly);
+//                        double h = (Math.abs(nn.x-goalx)+Math.abs(nn.y-goaly))*(1.0+R*C);
+                        int g = current.g + 10;
+                        double h = Math.abs((current.x-goalx)*(starty-goaly)-(startx-goalx)*(current.y-goaly))*0.001;
                         //map[n.x][n.y].parent=map[current.x][current.y];
                         if ((nn.type != '#') && (nn.type != '?')) {
-//                            System.err.println(n.x+" "+n.y);
+//                            for(Block o : closedSet) {
+//                            System.err.println("===============================");
+//                            System.err.println(nn.x+" "+nn.y+" "+closedSet.contains(nn)+" "+openSet.contains(nn));
                             if(closedSet.contains(nn)){
+//                                System.err.println("Closed: "+nn.x+" "+nn.y);
                                 continue;
+                            }else if(openSet.contains(nn)&&(nn.g>g)){
+                                openSet.remove(nn);
+                                nn.g=g;
+                                nn.f=g;
+                                nn.parent = current;
+                                openSet.add(nn);
+//                                System.err.println("replacing "+nn.x+" "+nn.y+" "+nn.f);
+                                continue;
+                            }else if(!openSet.contains(nn)) {
+                                nn.g = g;
+                                nn.f = g + h;
+                                nn.parent = current;
+//                                System.err.println("Adding " + nn.x + " " + nn.y + " " + nn.f);
+                                openSet.add(nn);
                             }
-                            for(Block o : openSet){
-                                if((o.x==nn.x)&&(o.y==nn.y)){
-                                    if(o.g>g){
-                                        openSet.remove(o);
-                                        nn.g = g;
-                                        nn.f = g+h;
-//                                        System.err.println("replacing "+n.x+" "+n.y+" "+n.g+" "+n.f);
-                                        openSet.add(nn);
-                                        nn.parent = current;
-                                        break;
-                                    }
-                                }
-                            }
-                            nn.g = g;
-                            nn.f = g+h;
-//                            System.err.println("adding "+n.x+" "+n.y+" "+n.g+" "+n.f);
-                            openSet.add(nn);
-                            nn.parent = current;
                         }
                     }
+                    System.err.println(openSet.size());
                 }
-                System.exit(0);
             }
         }
     }

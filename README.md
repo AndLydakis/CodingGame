@@ -31,3 +31,7 @@ Code for www.codingame.com
  * TheGift [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/TheGift/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/medium/TheGift/TheGift.java)
  * Scrabble [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/Scrabble/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/medium/Scrabble/Scrabble.java)
  * MayanCalculation [README](https://github.com/AndLydakis/CodingGame/blob/master/medium/MayanCalculation/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/medium/MayanCalculation/MayanCalculation.java)
+
+* Hard:
+
+ * The Labyrinth [README](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/TheLabyrinth.java))
