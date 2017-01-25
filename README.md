@@ -34,4 +34,5 @@ Code for www.codingame.com
 
 * Hard:
 
- * The Labyrinth [README](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/TheLabyrinth.java))
+ * The Labyrinth [README](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheLabyrinth/TheLabyrinth.java)
+ * The Bridge [README](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheBridge/README) [Java](https://github.com/AndLydakis/CodingGame/blob/master/hard/TheBridge/TheBridge.java))

@@ -1,3 +1,5 @@
+(ASTART SEARCH)
+
 There are 4 lanes on the bridge road and 1 to 4 bikes to control. There can only be one moto per lane and they are always vertically aligned.
 
 Each game turn, you can send a single instruction to every bike. Since  the bikes operate on the same frequency, they will all synchronize on the commands you send them.
