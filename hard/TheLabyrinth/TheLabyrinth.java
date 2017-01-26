@@ -58,8 +58,6 @@ class Player {
 
         }
     }
-
-
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         int R = in.nextInt(); // number of rows.
@@ -283,7 +281,6 @@ class Player {
     public static int calcF(int kx, int ky, int x, int y){
         return Math.abs(kx-x) + Math.abs(ky-y);
     }
-
     public static String getDir(Block s, Block d){
         if(s.x + 1 == d.x){
             return("DOWN");
